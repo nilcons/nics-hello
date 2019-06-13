@@ -1,0 +1,226 @@
+%% -*- latex -*-
+\newtoks\nicsroot\directlua{ tex.settoks("nicsroot", os.getenv("NICS_ROOT") or error("NICS_ROOT environment variable has to be set, use the Makefile")) }
+\input{\the\nicsroot /src/nics-cached.tex}
+\endofdump
+\input{\the\nicsroot /src/nics-noncached.tex}
+\hypersetup{
+  pdfauthor={your name or emailss},
+  pdftitle={your presentation title},
+}
+\nicsgrid=0
+\begin{document}
+
+\section{Hello world}
+
+\nicstitleslide{images/welcome}{nics cheetsheat}{Look at the PDF and look at the code}
+
+\begin{slide}{Hello world}{This is our first slide}
+  \begin{nicscolumn}
+    \nicsheader{Welcome everyone}
+    \nicspar{We can have some paragraphs without bullet points}
+    \nicsitem{Or with bullet points}
+    \begin{nicsindent}
+      \nicsitem{\just
+        We can also have indentation for less important stuff inside another item.
+        Also note that this paragraph is justified and has the same length in each line.
+        This is pretty nice for long paragraphs, we have the same in books.
+      }
+      \nicsitem{\nicsleadword{Lead word} is something that changes the indentation for the rest of the item or paragraph.
+        Here the ``Lead word'' at the beginning is defined as lead word.
+      }
+    \end{nicsindent}
+  \end{nicscolumn}
+  \begin{nicscolumn*}{5cm}{0cm}{5cm}
+    \nicsitem{Absolute positioning is easy with nics}
+    \nicsitem{\nicslonghbox{You are bound only by your imagination and the papersize of course}}
+    \nicsmath
+    \nicsitem{$ e^{i\pi} = -1 $ ... WOW!}
+  \end{nicscolumn*}
+\end{slide}
+
+\begin{slide}{Slide with title, but without sub title}{}
+  \begin{nicscolumn}
+    \nicsitem{\mono{Typewriters were awesome, but loud!}}
+    \nicsitem{\serif{Serif fonts are good for books, maybe not for presentations}}
+    \nicsitem{\sans{You can be \slant{explicit}, but sans serif fonts are the \bold{default}}}
+    \nicshrule
+    \nicspar{\centering centering is easy}
+    \nicspar{\centering\nicsincludepic[width=3cm]{images/tux}}
+  \end{nicscolumn}
+\end{slide}
+
+\begin{slide}{Skips between paragraphs/items}{}
+  \begin{nicscolumn}
+    \nicsitem{Here will be a small skip}
+    \nicssmallskip
+    \nicsitem{And then after this a medium skip}
+    \nicsmedskip
+    \nicsitem{And finally a big skip}
+    \nicsbigskip
+    \nicsitem{Should we also have huge skips?  Maybe!}
+  \end{nicscolumn}
+\end{slide}
+
+\begin{slide}{Skips can be automated}{So you don't have to repeat them between every item}
+  \begin{nicscolumn*}{1cm}{2cm}{2cm}
+    \nicsheader{\tiny\mono{\bs nicsnoskips}}
+    \nicsnoskips
+    \nicsitem{point 1}
+    \nicsitem{point 2}
+    \nicsitem{point 3}
+    \nicsitem{point 4}
+  \end{nicscolumn*}
+  \begin{nicscolumn*}{4cm}{2cm}{2cm}
+    \nicsheader{\tiny\mono{\bs nicssmallskips}}
+    \nicssmallskips
+    \nicsitem{point 1}
+    \nicsitem{point 2}
+    \nicsitem{point 3}
+    \nicsitem{point 4}
+  \end{nicscolumn*}
+  \begin{nicscolumn*}{7cm}{2cm}{2cm}
+    \nicsheader{\tiny\mono{\bs nicsmedskips}}
+    \nicsmedskips
+    \nicsitem{point 1}
+    \nicsitem{point 2}
+    \nicsitem{point 3}
+    \nicsitem{point 4}
+  \end{nicscolumn*}
+  \begin{nicscolumn*}{10cm}{2cm}{2cm}
+    \nicsheader{\tiny\mono{\bs nicsbigskips}}
+    \nicsbigskips
+    \nicsitem{point 1}
+    \nicsitem{point 2}
+    \nicsitem{point 3}
+    \nicsitem{point 4}
+  \end{nicscolumn*}
+\end{slide}
+
+\begin{slide}{Colors}{}
+  \begin{nicscolumn}
+    \nicsitem{\textcolor{FireBrick}{hello colors}}
+    \nicsitem{\textcolor{Coral}{you are all beautiful}}
+    \nicsitem{\textcolor{ForestGreen}{yes, all of you}}
+
+    \nicsitem{\SMALL\url{https://developer.mozilla.org/en-US/docs/Web/CSS/color_value\#Color_keywords}}
+    \nicsitem{\href{http://www.yellowbearjourneys.com/color_themes/color_closest.html}{\Small \bold{www.yellowbearjourneys.com/color_themes/color_closest.html}}}
+
+    \definecolor{customgreen}{HTML}{00D200}
+    \nicsitem{\textcolor{customgreen}{It's ok to use custom colornames}}
+
+    \nicsitem{We have a special style for cmdline: \nicscmdline{$ ls -l}}
+  \end{nicscolumn}
+\end{slide}
+
+\nicsgrid1
+
+\begin{slide}{Font sizes}{}
+  \begin{nicscolumn*}{5cm}{0cm}{10cm}
+    \def\example#1{#1\nicsitem{\string#1}}
+    \example{\TINY}
+    \example{\Tiny}
+    \example{\tiny}
+    \example{\SMALL}
+    \example{\Small}
+    \example{\small}
+    \example{\normalsize}
+    \example{\large}
+    \example{\Large}
+    \example{\LARGE}
+    \example{\huge}
+    \example{\Huge}
+    \example{\HUGE}
+  \end{nicscolumn*}
+\end{slide}
+
+\begin{slide}{Terminals}{We have an escape character to \LaTeX, so you can do fancy stuff}
+  \begin{nicscolumn}
+    \nicsmath
+    \begin{nicsterm}
+      59676@15:09 errge@brooks:~/work/nics-hello/demo $ ls -l
+      total 988
+      §\textcolor{red}{d}§rwxr-xr-x 1 errge errge     138 Jun 13 15:09 build
+      drwxr-xr-x 1 errge errge      36 Jun 13 14:59 images
+      -rw-r--r-- 1 errge errge      63 Jun 13 13:47 Makefile
+      -rw-r--r-- 1 errge errge 1001300 Jun 13 15:09 slides.pdf
+      -rw-r--r-- 1 errge errge    3880 Jun 13 15:09 slides.tex
+      59677@15:09 errge@brooks:~/work/nics-hello/demo $ §\nicstermcursor\ $e^{i\pi}$
+    \end{nicsterm}
+  \end{nicscolumn}
+\end{slide}
+
+\begin{slide}{Code}{Without syntax highlighting}
+  \begin{nicscolumn}
+    \nicsitem{It's the same as terminals, but with light color scheme}
+    \nicsitem{Terminals and codes (and other parts too) can also be zoomed}
+    \nicszoom[4cm]{
+      \begin{nicscode}
+        int main() {
+          return 0;
+        }
+      \end{nicscode}
+    }
+    \nicszoomnoautocenter1
+    \nicszoom[3cm]{
+      \begin{nicscode}
+        int main() {
+          return 0;
+        }
+      \end{nicscode}
+    }
+  \end{nicscolumn}
+  \begin{nicscolumn*}{7cm}{5.5cm}{2cm}
+    \nicszoom{\nicsmultiline{zooming \\ defaults \\ to \\ horizontal \\ size}}
+  \end{nicscolumn*}
+\end{slide}
+
+\begin{slide}{Externalization}{For TikZ}
+  \begin{nicscolumn}
+    \nicsexterntemplate{tikz}
+    \begin{nicsextern}{nics-is-awesome}
+      \begin{tikzpicture}
+        \node (left)  [ circle, draw = black, minimum width = 4cm, label=left:{\nicsmultiline{has \\ source \\ code}} ] {};
+        \node (right) [ circle, draw = black, minimum width = 4cm, label=right:{\nicsmultiline{looks \\ nice}}, right=-1.5cm of left ] {};
+        \node at ([xshift=-5mm] left.center) { RST/MD };
+        \node at ([xshift=7mm] right.center) { PowerPoint };
+        \node at ($ (left)!0.5!(right) $) [text = Tomato ] { nics };
+      \end{tikzpicture}
+    \end{nicsextern}
+  \end{nicscolumn}
+\end{slide}
+
+\section{Externalization}
+
+\begin{slide}{Externalization}{For slow to import images}
+  \begin{nicscolumn}[3cm]
+    \begin{nicsextern}{}
+      \nicsincludepic{images/tux}
+    \end{nicsextern}
+  \end{nicscolumn}
+\end{slide}
+
+\begin{slide}{Externalization}{For source code highglighting}
+  \begin{nicscolumn}
+    \nicsitem{This is our killer-app compared to Google Slides/Powerpoint}
+    \nicsexterncode{go}
+    \begin{nicsextern}[height=5.5cm]{}
+      package main
+
+      func main() {
+        b := string(96)
+        print(p, b, p, b)
+      }
+
+      const p = `package main
+
+      func main() {
+        b := string(96)
+        print(p, b, p, b)
+      }
+
+      const p = `
+    \end{nicsextern}
+  \end{nicscolumn}
+\end{slide}
+
+\end{document}
