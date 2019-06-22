@@ -4,10 +4,11 @@
 \endofdump
 \input{\the\nicsroot /src/nics-noncached.tex}
 \hypersetup{
-  pdfauthor={your name or emailss},
+  pdfauthor={your name or email},
   pdftitle={your presentation title},
 }
 \nicsgrid=0
+
 \begin{document}
 
 \section{Hello world}
@@ -112,7 +113,7 @@
   \end{nicscolumn}
 \end{slide}
 
-\nicsgrid1
+\nicsgrid=1
 
 \begin{slide}{Font sizes}{}
   \begin{nicscolumn*}{5cm}{0cm}{10cm}
@@ -133,11 +134,13 @@
   \end{nicscolumn*}
 \end{slide}
 
+\nicsgrid=0
+
 \begin{slide}{Terminals}{We have an escape character to \LaTeX, so you can do fancy stuff}
   \begin{nicscolumn}
     \nicsmath
     \begin{nicsterm}
-      59676@15:09 errge@brooks:~/work/nics-hello/demo $ ls -l
+      59676@15:09 errge@brooks:~/work/nics-hello/demo $ §\nicstermcmd{ls -l}
       total 988
       §\textcolor{red}{d}§rwxr-xr-x 1 errge errge     138 Jun 13 15:09 build
       drwxr-xr-x 1 errge errge      36 Jun 13 14:59 images
@@ -207,7 +210,7 @@
       package main
 
       func main() {
-        b := string(96)
+        b := string(96)   §\sans{\bold{hello}, we escaped}
         print(p, b, p, b)
       }
 
